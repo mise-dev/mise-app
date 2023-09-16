@@ -1,14 +1,14 @@
 import { Toast, useToast, VStack, ButtonText, Button, ToastDescription, Text, Box, ToastTitle } from "@gluestack-ui/themed";
 import Product from "../components/Product";
+import Header from "../components/Header";
 
 export default function Home({ navigation }) {
     return (
-
         <Box width="100%" height="100%" justifyContent="center" alignItems="center">
             <Text>Just another piece of text</Text>
             <Text>Open up App.js to start working on your app!</Text>
             <Example />
-            <Button onPress={() => navigation.navigate("Kitchen")}>
+            <Button bgColor="gold" borderColor="black" borderWidth={2.5} borderRadius={8} onPress={() => navigation.navigate("Kitchen")}>
                 <ButtonText>
                     Kitchen Sink
                 </ButtonText>
@@ -22,6 +22,10 @@ function Example() {
     const toast = useToast()
     return (
         <Button
+            bgColor="gold"
+            borderColor="black"
+            borderWidth={2.5}
+            borderRadius={8}
             onPress={() => {
                 toast.show({
                     placement: "top",
