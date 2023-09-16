@@ -19,15 +19,6 @@ const styles = StyleSheet.create({
 const StyledImage = styled(Image, styles.image);
 
 const Product: React.FC<ProductProps> = ({ name, price, description }) => {
-    // const boxRef = useRef();
-    // useEffect(() => {
-    //     const styleObj = {
-    //         borderColor: "red",
-    //         borderWidth: 2,
-    //         borderRadius: "8"
-    //     };
-    //     boxRef.current.setNativeProps({ style: styleObj });
-    // }, [boxRef]);
     return (
         <Box p="$3" margin="$2" w="$48" borderWidth="$2" borderColor="$blueGray300" borderRadius="$xl">
             <Center>
