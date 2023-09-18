@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Box, Image, Text, HStack, styled, Center, Icon, StarIcon, VStack, Button, Divider } from "@gluestack-ui/themed";
+import { Box, Image, Text, HStack, styled, Center, Icon, StarIcon, VStack, Button, ButtonText, Divider } from "@gluestack-ui/themed";
 import { Cart, Star } from "iconoir-react-native";
 
 type ProductProps = {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const StyledImage = styled(Image, styles.image);
 
-const Product: React.FC<ProductProps> = ({ name, price, description }) => {
+const Product: React.FC<ProductProps> = ({name, description, price}) => {
     return (
         <Box p="$3" margin="$2" w="$48" borderWidth="$2" borderColor="$blueGray300" borderRadius="$xl">
             <Center>
@@ -62,4 +62,38 @@ const Product: React.FC<ProductProps> = ({ name, price, description }) => {
     )
 }
 
+
+const ProductNumbering =() => {
+    const [number, setNumber] = React.useState(1);
+    
+    function change(a, b){
+        if (a===1 && b===-1){
+            return 1;
+        }
+        else {
+            setNumber(a+b)
+            return a;
+        }
+    }
+    return (
+        <HStack height={"$5"}>
+        <Button onPress={() => change(number,-1)}  paddingHorizontal={"$0"}  width={20} height={"$5"} flexDirection="column" justifyContent="center" bgColor="transparent" borderWidth={"$1"} borderColor="black" borderRadius={5} >
+        <ButtonText color="black" size="lg" h={"$20"} justifyContent="center" >
+                -
+            </ButtonText>
+        </Button>
+        <Text color="black" w="$20" size="lg" lineHeight={20} textAlign="center" >
+            {number}
+        </Text>
+        <Button onPress={() => change(number,1)}  paddingHorizontal={"$0"}  width={20} height={"$5"} flexDirection="column" justifyContent="center" bgColor="transparent" borderWidth={"$1"} borderColor="black" borderRadius={5} >
+            <ButtonText color="black" size="lg" h={"$20"} justifyContent="center" >
+                +
+            </ButtonText>
+        </Button>
+        </HStack>
+    )
+}
+
 export default Product;
+export {ProductNumbering}
+
