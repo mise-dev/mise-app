@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
 type ContextType = {
     readonly data: any,
@@ -10,12 +10,12 @@ const MiseContext = createContext<ContextType>(null);
 const SdkProvider = ({ children }) => {
     const sdk = new MiseSdk();
 
-    const updateNameAction = (state: any) => {
+    const updateNameAction = (state: any, _: any) => {
         if (state.name) {
             state.name += "1";
         } else state.name = "Mike";
     }
-    const resetNameAction = (state: any) => {
+    const resetNameAction = (state: any, _: any) => {
         for (let key of Object.keys(state)) delete state[key];
     };
 
@@ -46,15 +46,15 @@ class MiseSdk {
     // affecting the performance of the app
     // but I couldn't care less at this moment 😛    
     registerAction(name: string, handler: Function) {
-        this.actions[name] = (state: any) => {
+        this.actions[name] = (state: any, action: any) => {
             const newState = { ...state };
-            handler(newState);
+            handler(newState, action);
             return newState;
         }
     }
 
     stateReducer(state: any, action: { type: string }) {
-        return this.actions[action.type](state);
+        return this.actions[action.type](state, action);
     }
 }
 
