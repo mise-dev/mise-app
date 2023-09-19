@@ -4,6 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HStack, Text } from "@gluestack-ui/themed";
 import { ProfileCircle, Cart } from "iconoir-react-native";
 
+// mise context
+import SdkProvider from "./sdk";
+
 // import screens here
 import Home from "./Views/Home";
 import KitchenSink from "./Views/KitchenSink";
@@ -26,19 +29,21 @@ const headerOptions = {
 export default function App() {
   return (
     <GluestackUIProvider config={config.theme}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {/* screens */}
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={headerOptions}
-          />
-          <Stack.Screen name="Kitchen" component={KitchenSink} />
+      <SdkProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            {/* screens */}
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={headerOptions}
+            />
+            <Stack.Screen name="Kitchen" component={KitchenSink} />
 
-          {/* end screens */}
-        </Stack.Navigator>
-      </NavigationContainer>
+            {/* end screens */}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SdkProvider>
     </GluestackUIProvider>
   )
 }

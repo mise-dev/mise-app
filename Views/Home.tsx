@@ -1,16 +1,27 @@
 import { Toast, useToast, VStack, ButtonText, Button, ToastDescription, Text, Box, ToastTitle } from "@gluestack-ui/themed";
 import Product from "../components/Product";
-import Header from "../components/Header";
+import { useState, useContext } from "react";
+import { MiseContext } from "../sdk";
 
 export default function Home({ navigation }) {
+    const [count, setCount] = useState(0);
+    const mise = useContext(MiseContext);
+
     return (
         <Box width="100%" height="100%" justifyContent="center" alignItems="center">
             <Text>Just another piece of text</Text>
             <Text>Open up App.js to start working on your app!</Text>
             <Example />
+            <Text onPress={() => setCount(count+1)}> {count} </Text>
             <Button bgColor="gold" borderColor="black" borderWidth={2.5} borderRadius={8} onPress={() => navigation.navigate("Kitchen")}>
-                <ButtonText>
+                <ButtonText color="black">
                     Kitchen Sink
+                </ButtonText>
+            </Button>
+            <Text onPress={() => mise.dispatch({ type: "set_name" })}> { mise.data.name ?? "None"} </Text>
+            <Button bgColor="gold" borderColor="black" borderWidth={2.5} borderRadius={8} onPress={() => mise.dispatch({ type: "reset" })}>
+                <ButtonText color="black">
+                    Reset
                 </ButtonText>
             </Button>
             <Product name="Sample" price={1000} description="Please buy this beautiful landscape picture I'm begging I'm poor." />
@@ -45,7 +56,7 @@ function Example() {
                 })
             }}
         >
-            <ButtonText>Press Me</ButtonText>
+            <ButtonText color="black">Press Me</ButtonText>
         </Button>
     )
 }
