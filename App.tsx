@@ -1,4 +1,4 @@
-import { GluestackUIProvider, config } from "@gluestack-ui/themed"
+import { GluestackUIProvider, config } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HStack, Text } from "@gluestack-ui/themed";
@@ -15,7 +15,11 @@ const Stack = createNativeStackNavigator();
 
 // configuring the header
 const headerOptions = {
-  headerLeft: ({ children }) => <Text bold color="black">{children}</Text>,
+  headerLeft: ({ children }) => (
+    <Text bold color="black">
+      {children}
+    </Text>
+  ),
   headerRight: () => (
     <>
       <HStack space="4xl">
@@ -23,7 +27,7 @@ const headerOptions = {
         <Cart color={"black"} width={30} height={30} />
       </HStack>
     </>
-  )
+  ),
 };
 
 export default function App() {
@@ -45,6 +49,5 @@ export default function App() {
         </NavigationContainer>
       </SdkProvider>
     </GluestackUIProvider>
-  )
+  );
 }
-
