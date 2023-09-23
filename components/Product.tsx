@@ -78,15 +78,16 @@ const ProductNumbering =() => {
     return (
         <HStack height={"$5"}>
         <Button onPress={() => change(number,-1)}  paddingHorizontal={"$0"}  width={20} height={"$5"} flexDirection="column" justifyContent="center" bgColor="transparent" borderWidth={"$2"} borderColor="black" borderRadius={5} >
-        <ButtonText color="black" size="lg" h={"$20"} justifyContent="center" paddingBottom={"$1"} bold>
+                <ButtonText color="black" size="lg" h={30} justifyContent="center"  bold>
                 -
             </ButtonText>
+
         </Button>
         <Text color="black" w="$10" size="lg" lineHeight={20} textAlign="center" >
             {number}
         </Text>
         <Button onPress={() => change(number,1)}  paddingHorizontal={"$0"}  width={20} height={"$5"} flexDirection="column" justifyContent="center" bgColor="transparent" borderWidth={"$2"} borderColor="black" borderRadius={5} >
-            <ButtonText color="black" size="lg" h={"$20"} justifyContent="center" paddingBottom={"$1"}  bold>
+            <ButtonText color="black" size="lg" h={30} justifyContent="center"  bold>
                 +
             </ButtonText>
         </Button>
