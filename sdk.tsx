@@ -51,10 +51,16 @@ class MiseSdk {
         this.actions = {};
 
         // handles adding a new value to a parent
-        this.registerAction("add_key", this.addKeyAction);
+        this.registerAction("add_parent_key", this.addKeyAction);
 
         // returns a value stored in a prent
-        this.registerAction("get_key", this.getKeyAction);
+        this.registerAction("get_parent_key", this.getKeyAction);
+
+        // handles adding a new key-value at the top level of state
+        this.registerAction("add_key", this.addMiscKey);
+        
+        // returns the current value stored in the state
+        this.registerAction("get_key", this.getMiscKey);
     }
 
     // making a new copy of the state object
@@ -82,6 +88,16 @@ class MiseSdk {
    // gets a value from the parent
    getKeyAction(state: any, action: any): any {
     return state[action.parent][action.key];
+   }
+
+   // adds a new value at the top level of state
+   addMiscKey(state: any, action: any) {
+    state[action.key] = action.value;
+   }
+
+   // get's a value stored at the top level of state
+   getMiscKey(state: any, action: any): any {
+        return state[action.key];
    }
 }
 
