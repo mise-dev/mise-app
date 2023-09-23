@@ -26,7 +26,17 @@ const SdkProvider = ({ children }) => {
     // so it references the most up-to-date version 
     // of the state reducer method from the sdk
     const stateReducer = (s, a) => sdk.stateReducer(s, a);
-    const [state, dispatch] = useReducer(stateReducer, {});
+    const [state, dispatch] = useReducer(stateReducer, {
+        cart: {},
+        explore: {},
+        user: {},
+        shopProfiile: {}, // the profile of the shop the user is currently viewing,
+        editShop: {}, // the state of the shop currently being edited/created 
+        // -- perhaps it makes sense to have this data localized
+        product: {}, // the product currently being viewed 
+        editProduct: {}, // the product currently being editor by the user
+    });
+
     return (
         <MiseContext.Provider value={{ data: state, dispatch }}>
             {children}
@@ -34,10 +44,17 @@ const SdkProvider = ({ children }) => {
     )
 }
 
+
 class MiseSdk {
     private actions: any;
     constructor() {
         this.actions = {};
+
+        // handles adding a new value to a parent
+        this.registerAction("add_key", this.addKeyAction);
+
+        // returns a value stored in a prent
+        this.registerAction("get_key", this.getKeyAction);
     }
 
     // making a new copy of the state object
@@ -56,6 +73,16 @@ class MiseSdk {
     stateReducer(state: any, action: { type: string }) {
         return this.actions[action.type](state, action);
     }
+    
+    // stores a new value under a parent
+   addKeyAction(state: any, action:any)  {
+    state[action.parent][action.key] = action.value; 
+   }
+
+   // gets a value from the parent
+   getKeyAction(state: any, action: any): any {
+    return state[action.parent][action.key];
+   }
 }
 
 export { MiseContext };
