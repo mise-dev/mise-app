@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet,  ScrollView} from "react-native";
 import {
   View,
   Box,
@@ -21,6 +21,8 @@ type ProductProps = {
   name: string;
   price: number;
   description: string; // a short description of the product
+  variantType: string;
+  variance: string[];
 };
 
 const styles = StyleSheet.create({
@@ -175,7 +177,7 @@ const CatalogProduct: React.FC<ProductProps> = ({
         </HStack>
 
         <Text marginBottom="$2" maxHeight={80} w="$full" size="sm">
-          {description.length > 45
+            {description.length > 45
             ? description.slice(0, 45) + "..."
             : description}
         </Text>
@@ -192,43 +194,72 @@ const CatalogProduct: React.FC<ProductProps> = ({
   );
 };
 
-const BuyProduct: React.FC<ProductProps> = ({ name, price, description }) => {
-  return (
-    <VStack
-      paddingLeft={"$5"}
-      paddingRight={"$5"}
-      marginTop="$4"
-      w="$full"
-      space="4xl"
-    >
-      <Center>
-        <Text color="black" bold size="2xl">
-          {name}
+const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance }) => {
+    
+    const listVariance = variance.map((variant) =>
+    <Button bgColor="transparent" borderRadius={"$2xl"} borderColor="gray" borderWidth={"$1"} marginRight={"$2"} marginTop={0}>
+        <ButtonText color="black"  >
+            {variant}
+        </ButtonText>
+    </Button>
+    );
+    return (
+    <Box 
+    flex={1}         
+    paddingLeft={"$5"}
+    paddingRight={"$5"}
+    marginTop="$2"
+    w="$full"
+    marginBottom={"$8"}>
+
+        <ScrollView>
+        <VStack
+
+        space="xl"
+        >
+        <Center>
+            <Text color="black" bold size="2xl">
+            {name}
+            </Text>
+
+            <Text color="black" bold size="2xl">
+            {price.toLocaleString()} XAF
+            </Text>
+        </Center>
+        <Center>
+            <StyledImage
+            w={"$full"}
+            h={340}
+            borderRadius="$xl"
+            source={{
+                uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                }}
+                />
+        </Center>
+
+
+        <Text bold color="black" >
+            Select {variantType}
         </Text>
+        <HStack>      
+            {listVariance}
+        </HStack>
+            
+        </VStack>
+        </ScrollView>
+        <HStack w={"$full"} h={"$16"} bottom={0}>
 
-        <Text color="black" bold size="xl">
-          {price.toLocaleString()} XAF
-        </Text>
-      </Center>
-      <Center>
-        <StyledImage
-          w={"$full"}
-          h={340}
-          borderRadius="$xl"
-          source={{
-            uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-          }}
-        />
-      </Center>
 
-      <Text marginBottom="$2" maxHeight={80} w="$full" size="sm">
-        {description.length > 45
-          ? description.slice(0, 45) + "..."
-          : description}
-      </Text>
+            <Text w={"50%"} h={"$16"} paddingBottom={"$4"} paddingTop={"$4"} color="black" bold size="2xl" >
+                {price.toLocaleString()} XAF
+            </Text>
 
-      <Box marginBottom={"$2"} position="absolute" bottom={0}></Box>
-    </VStack>
+            <Button w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
+                <ButtonText color="white">Add to Cart</ButtonText>
+                </Button>
+        </HStack>
+
+    </Box>
   );
 };
 
