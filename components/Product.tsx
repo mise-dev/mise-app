@@ -16,6 +16,10 @@ import {
   Divider,
 } from "@gluestack-ui/themed";
 import { Cart, Star } from "iconoir-react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import {MiseContext} from "../sdk";
+import { useState ,useReducer, useContext } from "react"
 
 type ProductProps = {
   name: string;
@@ -157,7 +161,7 @@ const CatalogProduct: React.FC<ProductProps> = ({
   description,
 }) => {
   return (
-    <HStack marginTop="$4" w="$full" space="4xl">
+    <HStack marginTop="$4" w="$full" space="4xl" bgColor="white">
       <Box marginRight={"$2"} borderRadius="$xl">
         <StyledImage
           w={180}
@@ -194,15 +198,42 @@ const CatalogProduct: React.FC<ProductProps> = ({
   );
 };
 
-const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance }) => {
-    
-    const listVariance = variance.map((variant) =>
-    <Button bgColor="transparent" borderRadius={"$2xl"} borderColor="gray" borderWidth={"$1"} marginRight={"$2"} marginTop={0}>
-        <ButtonText color="black"  >
-            {variant}
-        </ButtonText>
-    </Button>
-    );
+// const initialState = {
+//     button1: "gold",
+//     button2: "transparent",
+// };
+
+
+
+const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance}) => {
+
+
+
+    const navigation= useNavigation();
+    const listVariance = variance.map((variant) =>{
+        const {data,dispatch} = useContext(MiseContext);        
+
+        return(
+            
+            <Button 
+            borderRadius={"$2xl"} 
+            borderColor={data.activeButton === "button"+variance.indexOf(variant) ? "white" : "grey"} 
+            borderWidth={"$1"} 
+            marginRight={"$5"} 
+            marginTop={"$5"} 
+            bgColor={data.activeButton === "button"+variance.indexOf(variant) ? "gold" : "transparent"}
+            onPress={() =>dispatch({type: "CHANGE_COLOR", payload: "button"+variance.indexOf(variant)}) }
+            >
+
+                <ButtonText 
+                color={data.activeButton === "button"+variance.indexOf(variant) ? "white" : "black"}  
+                >
+                    {variant}
+                </ButtonText>
+            </Button>
+        );
+        });
+
     return (
     <Box 
     flex={1}         
@@ -210,27 +241,21 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
     paddingRight={"$5"}
     marginTop="$2"
     w="$full"
-    marginBottom={"$8"}>
+    >
 
         <ScrollView>
         <VStack
-
-        space="xl"
+        
         >
-        <Center>
-            <Text color="black" bold size="2xl">
+        <Text color="black" bold size="2xl">
             {name}
-            </Text>
-
-            <Text color="black" bold size="2xl">
-            {price.toLocaleString()} XAF
-            </Text>
-        </Center>
+        </Text>
         <Center>
             <StyledImage
             w={"$full"}
             h={340}
             borderRadius="$xl"
+            marginTop="$5"
             source={{
                 uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
                 }}
@@ -238,10 +263,11 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
         </Center>
 
 
-        <Text bold color="black" >
+
+        <Text bold color="black" marginTop="$5">
             Select {variantType}
         </Text>
-        <HStack>      
+        <HStack display="flex" flexWrap="wrap" >      
             {listVariance}
         </HStack>
             
@@ -254,7 +280,7 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
                 {price.toLocaleString()} XAF
             </Text>
 
-            <Button w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
+            <Button onPress={() => navigation.navigate("Kitchen")} w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
                 <ButtonText color="white">Add to Cart</ButtonText>
                 </Button>
         </HStack>

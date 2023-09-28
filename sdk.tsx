@@ -18,23 +18,41 @@ const SdkProvider = ({ children }) => {
   const resetNameAction = (state: any, _: any) => {
     for (let key of Object.keys(state)) delete state[key];
   };
+  const changeActiveButton = (state: any, _: any) => {
+    const {buttonId, color} = _.payload;
+
+    state[buttonId] = color;
+  };
 
   sdk.registerAction("set_name", updateNameAction);
   sdk.registerAction("reset", resetNameAction);
+  sdk.registerAction("CHANGE_COLOR", changeActiveButton);
 
   // wrapping the sdk.stateReducer in another function
   // so it references the most up-to-date version
   // of the state reducer method from the sdk
-  const stateReducer = (s, a) => sdk.stateReducer(s, a);
+
+
+  const stateReducer = (state: any, action: { type: string; payload?: any }) => {  
+    switch (action.type) {
+        case "CHANGE_COLOR":
+          const buttonId = action.payload;
+          return { ...state, activeButton: buttonId };
+
+        default:
+            return state;
+    }
+  };
   const [state, dispatch] = useReducer(stateReducer, {
     cart: {},
     explore: {},
     user: {},
-    shopProfiile: {}, // the profile of the shop the user is currently viewing,
+    shopProfile: {}, // the profile of the shop the user is currently viewing,
     editShop: {}, // the state of the shop currently being edited/created
     // -- perhaps it makes sense to have this data localized
     product: {}, // the product currently being viewed
-    editProduct: {}, // the product currently being editor by the user
+    editProduct: {},// the product currently being editor by the use 
+    activeButton: "button0",
   });
 
   return (
@@ -94,7 +112,7 @@ class MiseSdk {
     state[action.key] = action.value;
   }
 
-  // get's a value stored at the top level of state
+  // get's a value stored at the top leve l of state
   getMiscKey(state: any, action: any): any {
     return state[action.key];
   }
