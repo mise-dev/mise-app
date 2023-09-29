@@ -1,25 +1,14 @@
-import React, { useRef, useEffect } from "react";
-import { StyleSheet,  ScrollView} from "react-native";
 import {
-  View,
-  Box,
-  Image,
-  Text,
-  HStack,
-  styled,
-  Center,
-  Icon,
-  StarIcon,
-  VStack,
-  Button,
-  ButtonText,
-  Divider,
+  Box, Button,
+  ButtonText, Center, Divider, HStack, Icon, Image, StarIcon, styled, Text, View, VStack
 } from "@gluestack-ui/themed";
-import { Cart, Star } from "iconoir-react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Cart, Star } from "iconoir-react-native";
+import React, { useEffect, useRef } from "react";
+import { ScrollView, StyleSheet } from "react-native";
 
-import {MiseContext} from "../sdk";
-import { useState ,useReducer, useContext } from "react"
+import { useContext, useReducer, useState } from "react";
+import { MiseContext } from "../sdk";
 
 type ProductProps = {
   name: string;
@@ -181,7 +170,7 @@ const CatalogProduct: React.FC<ProductProps> = ({
         </HStack>
 
         <Text marginBottom="$2" maxHeight={80} w="$full" size="sm">
-            {description.length > 45
+          {description.length > 45
             ? description.slice(0, 45) + "..."
             : description}
         </Text>
@@ -205,85 +194,92 @@ const CatalogProduct: React.FC<ProductProps> = ({
 
 
 
-const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance}) => {
+const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance }) => {
+  const navigation = useNavigation();
 
+  const { data, dispatch } = useContext(MiseContext);
+  // create the key for the currently selected variant
+  console.log(data.currentVariant);
 
+  // const [activeVariant, setActiveVariant] = useState<string>("");
 
-    const navigation= useNavigation();
-    const listVariance = variance.map((variant) =>{
-        const {data,dispatch} = useContext(MiseContext);        
-
-        return(
-            
-            <Button 
-            borderRadius={"$2xl"} 
-            borderColor={data.activeButton === "button"+variance.indexOf(variant) ? "white" : "grey"} 
-            borderWidth={"$1"} 
-            marginRight={"$5"} 
-            marginTop={"$5"} 
-            bgColor={data.activeButton === "button"+variance.indexOf(variant) ? "gold" : "transparent"}
-            onPress={() =>dispatch({type: "CHANGE_COLOR", payload: "button"+variance.indexOf(variant)}) }
-            >
-
-                <ButtonText 
-                color={data.activeButton === "button"+variance.indexOf(variant) ? "white" : "black"}  
-                >
-                    {variant}
-                </ButtonText>
-            </Button>
-        );
-        });
-
+  const listVariance = variance.map((variant) => {
+    let isActive: boolean = variant === data.currentVariant;
     return (
-    <Box 
-    flex={1}         
-    paddingLeft={"$5"}
-    paddingRight={"$5"}
-    marginTop="$2"
-    w="$full"
+
+      <Button
+        borderRadius={"$2xl"}
+        borderColor={isActive ? "white" : "grey"}
+        borderWidth={"$1"}
+        marginRight={"$5"}
+        marginTop={"$5"}
+        bgColor={isActive ? "gold" : "transparent"}
+        key={variant}
+        onPress={() => {
+          //setActiveVariant(variant);
+          dispatch({ type: "add_key", key: "currentVariant", value: variant })
+        }
+        }
+      >
+
+        <ButtonText
+          color={isActive ? "white" : "black"}
+        >
+          {variant}
+        </ButtonText>
+      </Button>
+    );
+  });
+
+  return (
+    <Box
+      flex={1}
+      paddingLeft={"$5"}
+      paddingRight={"$5"}
+      marginTop="$2"
+      w="$full"
     >
 
-        <ScrollView>
+      <ScrollView>
         <VStack
-        
+
         >
-        <Text color="black" bold size="2xl">
+          <Text color="black" bold size="2xl">
             {name}
-        </Text>
-        <Center>
+          </Text>
+          <Center>
             <StyledImage
-            w={"$full"}
-            h={340}
-            borderRadius="$xl"
-            marginTop="$5"
-            source={{
+              w={"$full"}
+              h={340}
+              borderRadius="$xl"
+              marginTop="$5"
+              source={{
                 uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                }}
-                />
-        </Center>
+              }}
+            />
+          </Center>
 
 
 
-        <Text bold color="black" marginTop="$5">
+          <Text bold color="black" marginTop="$5">
             Select {variantType}
-        </Text>
-        <HStack display="flex" flexWrap="wrap" >      
+          </Text>
+          <HStack display="flex" flexWrap="wrap" >
             {listVariance}
-        </HStack>
-            
+          </HStack>
+
         </VStack>
-        </ScrollView>
-        <HStack w={"$full"} h={"$16"} bottom={0}>
+      </ScrollView>
+      <HStack w={"$full"} h={"$24"} bottom={0}>
 
+        <Text w={"50%"} h={"$16"} paddingBottom={"$4"} paddingTop={"$4"} color="black" bold size="2xl" >
+          {price.toLocaleString()} XAF
+        </Text>
 
-            <Text w={"50%"} h={"$16"} paddingBottom={"$4"} paddingTop={"$4"} color="black" bold size="2xl" >
-                {price.toLocaleString()} XAF
-            </Text>
-
-            <Button onPress={() => navigation.navigate("Kitchen")} w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
-                <ButtonText color="white">Add to Cart</ButtonText>
-                </Button>
-        </HStack>
+        <Button onPress={() => navigation.navigate("Kitchen")} w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
+          <ButtonText color="white">Add to Cart</ButtonText>
+        </Button>
+      </HStack>
 
     </Box>
   );
