@@ -25,19 +25,33 @@ export default function Home({ navigation }) {
   const [count, setCount] = useState(0);
   const mise = useContext(MiseContext);
 
+  let styles: string[] = [
+    "Sunset",
+    "Moonlight",
+    "Just another option so you can F yrself",
+  ];
+
   return (
-    <Box width="100%" height="100%" justifyContent="center" alignItems="center">
+    <Box
+      width="100%"
+      height="100%"
+      justifyContent="center"
+      alignItems="center"
+      bgColor="white"
+    >
       {/* <Text>Just another piece of text</Text>
             <Text>Open up App.js to start working on your app!</Text>
-            <Example /> */}
-      <Button onPress={() => navigation.navigate("Kitchen")}>
+        <Example />
+        */}
+      {/* <Button onPress={() => navigation.navigate("Kitchen")}>
         <ButtonText>Kitchen Sink</ButtonText>
-      </Button>
+      </Button> */}
 
       <BuyProduct
-        name="Sample"
+        name="Sunset Landscape"
         price={1000}
-        description="Please buy this beautiful landscape picture I'm begging I'm poor."
+        variantType="Style"
+        variance={styles}
       />
     </Box>
   );

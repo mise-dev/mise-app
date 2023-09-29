@@ -15,7 +15,7 @@ import { TextAndPrices, CatalogProduct } from "../components/Product";
 
 const KitchenSink = ({ navigation }) => {
   return (
-    <Box flex={1} p={"$3"} paddingBottom={"$5"}>
+    <Box flex={1} p={"$3"} paddingBottom={"$5"} bgColor="white">
       <ScrollView p="$4">
         <CatalogProduct
           name="Beautiful landscape photo"
