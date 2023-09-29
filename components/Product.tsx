@@ -1,6 +1,17 @@
 import {
-  Box, Button,
-  ButtonText, Center, Divider, HStack, Icon, Image, StarIcon, styled, Text, View, VStack
+  Box,
+  Button,
+  ButtonText,
+  Center,
+  Divider,
+  HStack,
+  Icon,
+  Image,
+  StarIcon,
+  styled,
+  Text,
+  View,
+  VStack,
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { Cart, Star } from "iconoir-react-native";
@@ -192,9 +203,12 @@ const CatalogProduct: React.FC<ProductProps> = ({
 //     button2: "transparent",
 // };
 
-
-
-const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance }) => {
+const BuyProduct: React.FC<ProductProps> = ({
+  name,
+  price,
+  variantType,
+  variance,
+}) => {
   const navigation = useNavigation();
 
   const { data, dispatch } = useContext(MiseContext);
@@ -206,7 +220,6 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
   const listVariance = variance.map((variant) => {
     let isActive: boolean = variant === data.currentVariant;
     return (
-
       <Button
         borderRadius={"$2xl"}
         borderColor={isActive ? "white" : "grey"}
@@ -217,16 +230,10 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
         key={variant}
         onPress={() => {
           //setActiveVariant(variant);
-          dispatch({ type: "add_key", key: "currentVariant", value: variant })
-        }
-        }
+          dispatch({ type: "add_key", key: "currentVariant", value: variant });
+        }}
       >
-
-        <ButtonText
-          color={isActive ? "white" : "black"}
-        >
-          {variant}
-        </ButtonText>
+        <ButtonText color={isActive ? "white" : "black"}>{variant}</ButtonText>
       </Button>
     );
   });
@@ -239,11 +246,8 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
       marginTop="$2"
       w="$full"
     >
-
       <ScrollView>
-        <VStack
-
-        >
+        <VStack>
           <Text color="black" bold size="2xl">
             {name}
           </Text>
@@ -259,28 +263,37 @@ const BuyProduct: React.FC<ProductProps> = ({ name, price, variantType, variance
             />
           </Center>
 
-
-
           <Text bold color="black" marginTop="$5">
             Select {variantType}
           </Text>
-          <HStack display="flex" flexWrap="wrap" >
+          <HStack display="flex" flexWrap="wrap">
             {listVariance}
           </HStack>
-
         </VStack>
       </ScrollView>
       <HStack w={"$full"} h={"$24"} bottom={0}>
-
-        <Text w={"50%"} h={"$16"} paddingBottom={"$4"} paddingTop={"$4"} color="black" bold size="2xl" >
+        <Text
+          w={"50%"}
+          h={"$16"}
+          paddingBottom={"$4"}
+          paddingTop={"$4"}
+          color="black"
+          bold
+          size="2xl"
+        >
           {price.toLocaleString()} XAF
         </Text>
 
-        <Button onPress={() => navigation.navigate("Kitchen")} w={"50%"} h={"$16"} bgColor="black" borderRadius={"$2xl"}>
+        <Button
+          onPress={() => navigation.navigate("Kitchen")}
+          w={"50%"}
+          h={"$16"}
+          bgColor="black"
+          borderRadius={"$2xl"}
+        >
           <ButtonText color="white">Add to Cart</ButtonText>
         </Button>
       </HStack>
-
     </Box>
   );
 };

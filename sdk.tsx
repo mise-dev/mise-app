@@ -36,7 +36,7 @@ const SdkProvider = ({ children }) => {
     editShop: {}, // the state of the shop currently being edited/created
     // -- perhaps it makes sense to have this data localized
     product: {}, // the product currently being viewed
-    editProduct: {},// the product currently being editor by the use
+    editProduct: {}, // the product currently being editor by the use
   });
 
   return (
