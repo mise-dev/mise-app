@@ -2,7 +2,13 @@ import { GluestackUIProvider, config } from "@gluestack-ui/themed";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HStack, Text } from "@gluestack-ui/themed";
-import { ProfileCircle, Cart, Shop, ShareAndroid, Search } from "iconoir-react-native";
+import {
+  ProfileCircle,
+  Cart,
+  Shop,
+  ShareAndroid,
+  Search,
+} from "iconoir-react-native";
 import { useNavigation } from "@react-navigation/native";
 // mise context
 import SdkProvider from "./sdk";
@@ -24,7 +30,7 @@ const headerOptions = {
     <>
       <HStack space="4xl">
         <ProfileCircle color={"black"} width={20} height={20} />
-        <Cart color={"black"} width={20} height={20}  />
+        <Cart color={"black"} width={20} height={20} />
       </HStack>
     </>
   ),
@@ -35,7 +41,7 @@ const shopheaderOptions = {
     <>
       <HStack space="4xl">
         <Search color={"black"} width={20} height={20} />
-        <Cart color={"black"} width={20} height={20}  />
+        <Cart color={"black"} width={20} height={20} />
         <ShareAndroid color={"black"} width={20} height={20} />
       </HStack>
     </>
@@ -56,7 +62,11 @@ export default function App() {
             />
             <Stack.Screen name="Kitchen" component={KitchenSink} />
 
-            <Stack.Screen options={shopheaderOptions} name="Shop" component={ShopProfile} />
+            <Stack.Screen
+              options={shopheaderOptions}
+              name="Shop"
+              component={ShopProfile}
+            />
 
             {/* end screens */}
           </Stack.Navigator>

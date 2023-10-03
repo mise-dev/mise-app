@@ -1,8 +1,23 @@
-import { Avatar, AvatarGroup, AvatarBadge, AvatarFallbackText, AvatarImage, Icon, Heading } from '@gluestack-ui/themed';
-import { User } from 'lucide-react-native';
+import {
+  Avatar,
+  AvatarGroup,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
+  Icon,
+  Heading,
+} from "@gluestack-ui/themed";
+import { User } from "lucide-react-native";
 // import Shop from './Shop';
-import React from 'react';import { Tabs, TabsTabList, TabsTab, TabsTabTitle, TabsTabPanels, TabsTabPanel } from '@gluestack-ui/themed';
-
+import React from "react";
+import {
+  Tabs,
+  TabsTabList,
+  TabsTab,
+  TabsTabTitle,
+  TabsTabPanels,
+  TabsTabPanel,
+} from "@gluestack-ui/themed";
 
 import {
   Toast,
@@ -28,26 +43,24 @@ import Product, {
   CatalogProduct,
   BuyProduct,
   ClickProduct,
-
 } from "../components/Product";
-import { Shop } from 'iconoir-react-native';
+import { Shop } from "iconoir-react-native";
 // import {textAndPrice} from "../components/Product";
 
 export default function Home({ navigation }) {
   const [count, setCount] = useState(0);
   const mise = useContext(MiseContext);
 
-  let styles: string[] = [
-    "Sunset",
-    "Moonlight",
-    "Just another option",
-  ];
+  let styles: string[] = ["Sunset", "Moonlight", "Just another option"];
 
   return (
-    <Button  borderRadius={'$lg'} bgColor='grey' onPress={() => navigation.navigate("Shop")} > 
-    <ButtonText>Shop</ButtonText> 
+    <Button
+      borderRadius={"$lg"}
+      bgColor="grey"
+      onPress={() => navigation.navigate("Shop")}
+    >
+      <ButtonText>Shop</ButtonText>
     </Button>
-    
   );
 }
 

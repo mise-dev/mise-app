@@ -41,27 +41,20 @@ const styles = StyleSheet.create({
 const StyledImage = styled(Image, styles.image);
 
 const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
-  
-  
   const generateStars = () => {
-    const listStars=[]
+    const listStars = [];
     for (let index = 1; index <= 5; index++) {
-
-        if (index <=rating){
-          listStars.push(
-            <Star  fill={"gold"} color={"black"} width={15} height={15}/>
-          )
-        }
-        else{
-          listStars.push(
-            <Star color={"black"} width={15} height={15}/>
-          )
-        }
-        
+      if (index <= rating) {
+        listStars.push(
+          <Star fill={"gold"} color={"black"} width={15} height={15} />,
+        );
+      } else {
+        listStars.push(<Star color={"black"} width={15} height={15} />);
       }
-      return listStars;
     }
-  
+    return listStars;
+  };
+
   return (
     <Box
       // p="$3"
@@ -73,16 +66,16 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
       borderRadius="$xl"
     >
       {/* <Center> */}
-        <StyledImage
-          w={"$full"}
-          h={180}
-          borderRadius={"$xl"}
-          borderBottomLeftRadius={0}
-          borderBottomRightRadius={0}
-          source={{
-            uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-          }}
-        />
+      <StyledImage
+        w={"$full"}
+        h={180}
+        borderRadius={"$xl"}
+        borderBottomLeftRadius={0}
+        borderBottomRightRadius={0}
+        source={{
+          uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        }}
+      />
       {/* </Center> */}
 
       <VStack padding="$1" width="$full">
@@ -91,23 +84,21 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
             {price.toLocaleString()} XAF
           </Text>
 
-          <Button bgColor="transparent" width={36}>
-          </Button>
+          <Button bgColor="transparent" width={36}></Button>
         </HStack>
 
         <Text marginTop="$1" maxHeight={80} w="$full" size="sm">
           {orders} orders
         </Text>
 
-        <HStack marginTop="$2" w={"$full"} display="flex" alignItems="center"  >
-          
+        <HStack marginTop="$2" w={"$full"} display="flex" alignItems="center">
           {generateStars()}
-          <Text color="black" w={"30%"}  bold size="lg">
-              {rating}
+          <Text color="black" w={"30%"} bold size="lg">
+            {rating}
           </Text>
 
-            <Button  bgColor="#ffda00" w={10} height={30} flex={1} >
-              <Cart color={"white"} height={20} width={20}  />
+          <Button bgColor="#ffda00" w={10} height={30} flex={1}>
+            <Cart color={"white"} height={20} width={20} />
           </Button>
         </HStack>
       </VStack>
@@ -324,14 +315,16 @@ const BuyProduct: React.FC<ProductProps> = ({
   );
 };
 
-const ClickProduct: React.FC<ProductProps> = ({
-  price,
-  orders,
-  rating,
-}) => {
-
-  return(
-    <HStack width={"50%"} margin={"$1"} h={400} flex={1} display="flex" flexWrap="wrap">
+const ClickProduct: React.FC<ProductProps> = ({ price, orders, rating }) => {
+  return (
+    <HStack
+      width={"50%"}
+      margin={"$1"}
+      h={400}
+      flex={1}
+      display="flex"
+      flexWrap="wrap"
+    >
       <Box width={"50%"} margin={"$1"} h={400} flex={1} borderWidth={"$1"}>
         <StyledImage
           w={"$full"}
@@ -343,21 +336,14 @@ const ClickProduct: React.FC<ProductProps> = ({
           }}
         />
 
-        <Text>
-          {price} XAF
-        </Text>
+        <Text>{price} XAF</Text>
 
-        <Text>
-          {orders} orders
-        </Text>
-          <Text>
-            {rating}
-          </Text>
+        <Text>{orders} orders</Text>
+        <Text>{rating}</Text>
       </Box>
     </HStack>
-  )
-
-}
+  );
+};
 
 export default Product;
 export { ProductNumbering };
