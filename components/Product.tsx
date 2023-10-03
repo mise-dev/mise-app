@@ -27,6 +27,8 @@ type ProductProps = {
   description: string; // a short description of the product
   variantType: string;
   variance: string[];
+  rating: number;
+  orders: number;
 };
 
 const styles = StyleSheet.create({
@@ -38,50 +40,74 @@ const styles = StyleSheet.create({
 
 const StyledImage = styled(Image, styles.image);
 
-const Product: React.FC<ProductProps> = ({ name, description, price }) => {
+const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
+  
+  
+  const generateStars = () => {
+    const listStars=[]
+    for (let index = 1; index <= 5; index++) {
+
+        if (index <=rating){
+          listStars.push(
+            <Star  fill={"gold"} color={"black"} width={15} height={15}/>
+          )
+        }
+        else{
+          listStars.push(
+            <Star color={"black"} width={15} height={15}/>
+          )
+        }
+        
+      }
+      return listStars;
+    }
+  
   return (
     <Box
-      p="$3"
-      margin="$2"
-      w="$48"
+      // p="$3"
+      // marginRight="$1"
+      // marginBottom="$1"
+      w="50%"
       borderWidth="$2"
       borderColor="$blueGray300"
       borderRadius="$xl"
     >
-      <Center>
+      {/* <Center> */}
         <StyledImage
-          w={180}
+          w={"$full"}
           h={180}
-          borderRadius="$md"
+          borderRadius={"$xl"}
+          borderBottomLeftRadius={0}
+          borderBottomRightRadius={0}
           source={{
             uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
           }}
         />
-      </Center>
+      {/* </Center> */}
 
-      <VStack marginTop="$2" width="$full">
+      <VStack padding="$1" width="$full">
         <HStack space="$4xl" w="$full" alignItems="center">
-          <Text color="black" bold w="$32" size="lg">
-            {name}
+          <Text color="black" bold size="xl">
+            {price.toLocaleString()} XAF
           </Text>
 
           <Button bgColor="transparent" width={36}>
-            <Star color={"black"} width={24} height={24} />
           </Button>
         </HStack>
 
         <Text marginTop="$1" maxHeight={80} w="$full" size="sm">
-          {description.length > 45
-            ? description.slice(0, 45) + "..."
-            : description}
+          {orders} orders
         </Text>
 
-        <HStack marginTop="$2" w="$full" space="4xl" alignItems="center">
-          <Text color="black" bold size="xl">
-            {price.toLocaleString()} XAF
+        <HStack marginTop="$2" w={"$full"} display="flex" alignItems="center"  >
+          
+          {generateStars()}
+          <Text color="black" w={"30%"}  bold size="lg">
+              {rating}
           </Text>
-          <Button width={34} height={35} bgColor="#ffda00">
-            <Cart color={"white"} height={20} width={20} />
+
+            <Button  bgColor="#ffda00" w={10} height={30} flex={1} >
+              <Cart color={"white"} height={20} width={20}  />
           </Button>
         </HStack>
       </VStack>
@@ -298,8 +324,44 @@ const BuyProduct: React.FC<ProductProps> = ({
   );
 };
 
+const ClickProduct: React.FC<ProductProps> = ({
+  price,
+  orders,
+  rating,
+}) => {
+
+  return(
+    <HStack width={"50%"} margin={"$1"} h={400} flex={1} display="flex" flexWrap="wrap">
+      <Box width={"50%"} margin={"$1"} h={400} flex={1} borderWidth={"$1"}>
+        <StyledImage
+          w={"$full"}
+          h={200}
+          borderTopLeftRadius={"$xl"}
+          borderTopRightRadius={"$xl"}
+          source={{
+            uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+          }}
+        />
+
+        <Text>
+          {price} XAF
+        </Text>
+
+        <Text>
+          {orders} orders
+        </Text>
+          <Text>
+            {rating}
+          </Text>
+      </Box>
+    </HStack>
+  )
+
+}
+
 export default Product;
 export { ProductNumbering };
 export { TextAndPrices };
 export { CatalogProduct };
 export { BuyProduct };
+export { ClickProduct };
