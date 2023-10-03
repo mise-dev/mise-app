@@ -65,53 +65,14 @@ return(
           
     <Center>
     <HStack  display="flex" flexWrap="wrap">
-      <Product
-              price={1000}
-              rating= {4.5}
-              orders={200}
-            />
-
-      <Product
-              price={2000}
-              rating= {5}
-              orders={200}
-            />
-
-      <Product
-              price={500}
-              rating= {2.5}
-              orders={200}
-            />
-
-      <Product
-              price={10000}
-              rating= {4}
-              orders={200}
-            />
-      <Product
-              price={1000}
-              rating= {4.5}
-              orders={200}
-            />
-
-      <Product
-              price={2000}
-              rating= {5}
-              orders={200}
-            />
-
-      <Product
-              price={500}
-              rating= {2.5}
-              orders={200}
-            />
-
-      <Product
-              price={10000}
-              rating= {4}
-              orders={200}
-            /> 
-    </HStack>
+      {Array(8).fill(0).map(_ => (
+        <Product 
+          price={Math.floor(Math.random()*10000)}
+          rating={Math.floor(Math.random()*5)}
+          orders={Math.floor(Math.random()*1000)}
+        />
+      ))}
+     </HStack>
     </Center>
     </ScrollView>
       {/* will implement the tabs lateron */}
