@@ -1,4 +1,25 @@
 import {
+  Avatar,
+  AvatarGroup,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
+  Icon,
+  Heading,
+} from "@gluestack-ui/themed";
+import { User } from "lucide-react-native";
+// import Shop from './Shop';
+import React from "react";
+import {
+  Tabs,
+  TabsTabList,
+  TabsTab,
+  TabsTabTitle,
+  TabsTabPanels,
+  TabsTabPanel,
+} from "@gluestack-ui/themed";
+
+import {
   Toast,
   useToast,
   VStack,
@@ -8,6 +29,9 @@ import {
   Text,
   Box,
   ToastTitle,
+  ScrollView,
+  HStack,
+  Center,
 } from "@gluestack-ui/themed";
 
 import { useState, useContext } from "react";
@@ -18,42 +42,25 @@ import Product, {
   TextAndPrices,
   CatalogProduct,
   BuyProduct,
+  ClickProduct,
 } from "../components/Product";
+import { Shop } from "iconoir-react-native";
 // import {textAndPrice} from "../components/Product";
 
 export default function Home({ navigation }) {
   const [count, setCount] = useState(0);
   const mise = useContext(MiseContext);
 
-  let styles: string[] = [
-    "Sunset",
-    "Moonlight",
-    "Just another option so you can F yrself",
-  ];
+  let styles: string[] = ["Sunset", "Moonlight", "Just another option"];
 
   return (
-    <Box
-      width="100%"
-      height="100%"
-      justifyContent="center"
-      alignItems="center"
-      bgColor="white"
+    <Button
+      borderRadius={"$lg"}
+      bgColor="grey"
+      onPress={() => navigation.navigate("Shop")}
     >
-      {/* <Text>Just another piece of text</Text>
-            <Text>Open up App.js to start working on your app!</Text>
-        <Example />
-        */}
-      {/* <Button onPress={() => navigation.navigate("Kitchen")}>
-        <ButtonText>Kitchen Sink</ButtonText>
-      </Button> */}
-
-      <BuyProduct
-        name="Sunset Landscape"
-        price={1000}
-        variantType="Style"
-        variance={styles}
-      />
-    </Box>
+      <ButtonText>Shop</ButtonText>
+    </Button>
   );
 }
 
