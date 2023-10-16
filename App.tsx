@@ -17,6 +17,11 @@ import SdkProvider from "./sdk";
 import Home from "./Views/Home";
 import KitchenSink from "./Views/KitchenSink";
 import ShopProfile from "./Views/Shop";
+import Products from "./Views/Products";
+import TabApp from "./navigation/Tabs";
+
+import { StatusBar } from "react-native";
+import RootNavigator from "./navigation/RootNavigator";
 
 const Stack = createNativeStackNavigator();
 // configuring the header
@@ -48,29 +53,22 @@ const shopheaderOptions = {
   ),
 };
 
+const productheaderOptions = {
+  headerRight: () => (
+    <>
+      <HStack space="4xl">
+        <Search color={"black"} width={20} height={20} />
+      </HStack>
+    </>
+  ),
+};
+
 export default function App() {
   return (
     <GluestackUIProvider config={config.theme}>
       <SdkProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            {/* screens */}
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={headerOptions}
-            />
-            <Stack.Screen name="Kitchen" component={KitchenSink} />
-
-            <Stack.Screen
-              options={shopheaderOptions}
-              name="Shop"
-              component={ShopProfile}
-            />
-
-            {/* end screens */}
-          </Stack.Navigator>
-        </NavigationContainer>
+        <StatusBar hidden />
+        <RootNavigator />
       </SdkProvider>
     </GluestackUIProvider>
   );
