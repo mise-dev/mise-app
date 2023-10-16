@@ -47,7 +47,7 @@ import Product, {
 import { Shop } from "iconoir-react-native";
 // import {textAndPrice} from "../components/Product";
 
-export default function Home({ navigation }) {
+export default function HomePage({ navigation }) {
   const [count, setCount] = useState(0);
   const mise = useContext(MiseContext);
 
@@ -57,9 +57,9 @@ export default function Home({ navigation }) {
     <Button
       borderRadius={"$lg"}
       bgColor="grey"
-      onPress={() => navigation.navigate("Shop")}
+      onPress={() => navigation.navigate("Products")}
     >
-      <ButtonText>Shop</ButtonText>
+      <ButtonText>Product</ButtonText>
     </Button>
   );
 }

@@ -36,6 +36,8 @@ import Product, {
   BuyProduct,
   ClickProduct,
 } from "../components/Product";
+import { useEffect } from "react";
+import { Search } from "iconoir-react-native";
 
 const ShopProfile = ({ navigation }) => {
   return (
