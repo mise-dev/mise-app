@@ -29,6 +29,7 @@ const SdkProvider = ({ children }) => {
 
   const stateReducer = (s, a) => sdk.stateReducer(s, a);
   const [state, dispatch] = useReducer(stateReducer, {
+    routeName: "Home",
     cart: {},
     explore: {},
     user: {},
