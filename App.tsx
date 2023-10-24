@@ -18,7 +18,7 @@ import Home from "./Views/Home";
 import KitchenSink from "./Views/KitchenSink";
 import ShopProfile from "./Views/Shop";
 import Products from "./Views/Products";
-import TabApp from "./navigation/Tabs";
+import SearchView from "./Views/SearchView";
 
 import { StatusBar } from "react-native";
 import RootNavigator from "./navigation/RootNavigator";
