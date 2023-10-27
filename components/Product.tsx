@@ -46,7 +46,7 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
     for (let index = 1; index <= 5; index++) {
       if (index <= rating) {
         listStars.push(
-          <Star fill={"gold"} color={"black"} width={15} height={15} />,
+          <Star fill={"gold"} color={"black"} width={15} height={15} />
         );
       } else {
         listStars.push(<Star color={"black"} width={15} height={15} />);
@@ -72,6 +72,7 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
         borderRadius={"$xl"}
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
+        alt="something cool"
         source={{
           uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         }}
@@ -184,6 +185,7 @@ const CatalogProduct: React.FC<ProductProps> = ({
           w={180}
           h={180}
           borderRadius="$xl"
+          alt="something cool"
           source={{
             uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
           }}
@@ -274,6 +276,7 @@ const BuyProduct: React.FC<ProductProps> = ({
               h={340}
               borderRadius="$xl"
               marginTop="$5"
+              alt="something cool"
               source={{
                 uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
               }}
@@ -327,6 +330,7 @@ const ClickProduct: React.FC<ProductProps> = ({ price, orders, rating }) => {
     >
       <Box width={"50%"} margin={"$1"} h={400} flex={1} borderWidth={"$1"}>
         <StyledImage
+          alt="something cool"
           w={"$full"}
           h={200}
           borderTopLeftRadius={"$xl"}

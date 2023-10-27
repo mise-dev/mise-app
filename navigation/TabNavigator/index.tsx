@@ -9,13 +9,17 @@ import { Box } from "@gluestack-ui/themed";
 import { Cart, Shop, Home } from "iconoir-react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Products from "../../Views/Products";
+import SearchView from "../../Views/SearchView";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const screenOptions = (route, color) => {
   let iconName;
   switch (route.name) {
-    case "Home":
+    case "Explore":
       iconName = "home";
       break;
     case "Shop":
@@ -33,18 +37,33 @@ const screenOptions = (route, color) => {
   }
   return <Cart color={color} width={20} height={20} />;
 };
-const TabNavigator = () => {
+
+const Something = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => screenOptions(route, color),
+        headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="Explore" component={Products} />
       <Tab.Screen name="Shop" component={ShopProfile} />
       <Tab.Screen name="Cart" component={KitchenSink} />
     </Tab.Navigator>
   );
 };
+
+function TabNavigator(navigation) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Something}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="SearchView" component={SearchView} />
+    </Stack.Navigator>
+  );
+}
 
 export default TabNavigator;

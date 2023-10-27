@@ -70,7 +70,7 @@ const Products = ({ navigation }) => {
     <Box>
       <ScrollView width="100%" height="100%">
         <Box bgColor="white" borderRadius={"$lg"} margin={"$2"} padding={"$3"}>
-          <Input
+          {/* <Input
             size={"lg"}
             variant={"outline"}
             isInvalid={false}
@@ -78,6 +78,7 @@ const Products = ({ navigation }) => {
             w={"$full"}
             p={"$2"}
             borderRadius={"$full"}
+            // onPress={() => navigation.navigate("Shop")}
           >
             <InputIcon pr="$4" h={"$4"} alignSelf="center">
               <Icon as={SearchIcon} />
@@ -89,7 +90,34 @@ const Products = ({ navigation }) => {
               value={value}
               placeholder="Enter Text here"
             />
-          </Input>
+          </Input> */}
+
+          <Box
+            w={"$full"}
+            h={"$10"}
+            borderColor="grey"
+            // paddingVertical={"$2"}
+            paddingHorizontal={"$3"}
+            borderRadius={"$full"}
+            borderWidth={"$1"}
+            onTouchStart={() => navigation.navigate("SearchView")}
+            // onPress={() => navigation.navigate("Shops")}
+          >
+            <Box h={"$full"} display="flex" justifyContent="center">
+              <HStack>
+                <Icon pr={"$4"} as={SearchIcon} />
+                <Text
+                  marginLeft={"$4"}
+                  display="flex"
+                  fontSize={"$lg"}
+                  justifyContent="center"
+                  color="grey"
+                >
+                  Enter Text here
+                </Text>
+              </HStack>
+            </Box>
+          </Box>
         </Box>
 
         <Center>
@@ -109,5 +137,12 @@ const Products = ({ navigation }) => {
     </Box>
   );
 };
+
+// Products.navigationOptions = ({ navigation }) => {
+//   const { routeName } = navigation.state;
+//   return {
+//     headerShown: routeName === "Shop" ? false : true,
+//   };
+// };
 
 export default Products;
