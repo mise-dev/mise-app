@@ -70,38 +70,14 @@ const Products = ({ navigation }) => {
     <Box>
       <ScrollView width="100%" height="100%">
         <Box bgColor="white" borderRadius={"$lg"} margin={"$2"} padding={"$3"}>
-          {/* <Input
-            size={"lg"}
-            variant={"outline"}
-            isInvalid={false}
-            isDisabled={false}
-            w={"$full"}
-            p={"$2"}
-            borderRadius={"$full"}
-            // onPress={() => navigation.navigate("Shop")}
-          >
-            <InputIcon pr="$4" h={"$4"} alignSelf="center">
-              <Icon as={SearchIcon} />
-            </InputIcon>
-            <InputField
-              onChange={(e: any) => {
-                setValue(e.nativeEvent.text);
-              }}
-              value={value}
-              placeholder="Enter Text here"
-            />
-          </Input> */}
-
           <Box
             w={"$full"}
             h={"$10"}
             borderColor="grey"
-            // paddingVertical={"$2"}
             paddingHorizontal={"$3"}
             borderRadius={"$full"}
             borderWidth={"$1"}
             onTouchStart={() => navigation.navigate("SearchView")}
-            // onPress={() => navigation.navigate("Shops")}
           >
             <Box h={"$full"} display="flex" justifyContent="center">
               <HStack>
@@ -121,7 +97,7 @@ const Products = ({ navigation }) => {
         </Box>
 
         <Center>
-          <HStack display="flex" flexWrap="wrap">
+          <HStack display="flex" flexWrap="wrap" justifyContent="center">
             {Array(8)
               .fill(0)
               .map((_) => (

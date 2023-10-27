@@ -61,7 +61,11 @@ function TabNavigator(navigation) {
         component={Something}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="SearchView" component={SearchView} />
+      <Stack.Screen
+        name="SearchView"
+        component={SearchView}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

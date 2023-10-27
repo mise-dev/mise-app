@@ -60,16 +60,19 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
       // p="$3"
       // marginRight="$1"
       // marginBottom="$1"
-      w="50%"
-      borderWidth="$2"
-      borderColor="$blueGray300"
-      borderRadius="$xl"
+      w={"47.5%"}
+      borderColor="white"
+      // borderWidth={"$2"}
+      borderRadius="$2xl"
+      bgColor="white"
+      margin={"$1"}
+      alignItems="center"
     >
       {/* <Center> */}
       <StyledImage
         w={"$full"}
         h={180}
-        borderRadius={"$xl"}
+        borderRadius={"$2xl"}
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
         alt="something cool"
@@ -91,18 +94,31 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
         <Text marginTop="$1" maxHeight={80} w="$full" size="sm">
           {orders} orders
         </Text>
-
-        <HStack marginTop="$2" w={"$full"} display="flex" alignItems="center">
-          {generateStars()}
-          <Text color="black" w={"30%"} bold size="lg">
-            {rating}
-          </Text>
-
-          <Button bgColor="#ffda00" w={10} height={30} flex={1}>
-            <Cart color={"white"} height={20} width={20} />
-          </Button>
-        </HStack>
       </VStack>
+      <HStack
+        marginTop="$2"
+        pl={"$1"}
+        w={"$full"}
+        display="flex"
+        alignItems="center"
+      >
+        {generateStars()}
+        <Text color="black" w={"30%"} bold size="lg">
+          {rating}
+        </Text>
+
+        <Button
+          marginLeft={-1}
+          bgColor="#ffda00"
+          borderRadius={0}
+          borderBottomRightRadius={"$2xl"}
+          w={10}
+          height={30}
+          flex={1}
+        >
+          <Cart color={"white"} height={20} width={20} />
+        </Button>
+      </HStack>
     </Box>
   );
 };

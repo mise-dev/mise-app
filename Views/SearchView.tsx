@@ -4,7 +4,7 @@ import {
   InputField,
   InputIcon,
   SearchIcon,
-  FormControl,
+  ArrowLeftIcon,
 } from "@gluestack-ui/themed";
 
 import { Icon } from "@gluestack-ui/themed";
@@ -23,14 +23,16 @@ import {
   HStack,
   Center,
 } from "@gluestack-ui/themed";
-
-const SearchView = () => {
+const SearchView = ({ navigation }) => {
   const [value, setValue] = useState("");
 
   return (
     <Box bgColor="white" h={"$full"} p={"$4"}>
       <Center marginBottom={"$2"}>
         <HStack>
+          <Button bgColor="white" onPress={() => navigation.goBack()}>
+            <ArrowLeftIcon />
+          </Button>
           <Input
             size={"lg"}
             variant={"outline"}

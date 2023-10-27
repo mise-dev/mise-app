@@ -79,7 +79,7 @@ const ShopProfile = ({ navigation }) => {
         </Box>
 
         <Center>
-          <HStack display="flex" flexWrap="wrap">
+          <HStack display="flex" flexWrap="wrap" justifyContent="center">
             {Array(8)
               .fill(0)
               .map((_) => (
