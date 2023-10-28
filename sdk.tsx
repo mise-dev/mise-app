@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 type ContextType = {
   readonly data: any;
   dispatch: React.Dispatch<any>;
-  sdk: MiseSdk
+  sdk: MiseSdk;
 };
 
 const MiseContext = createContext<ContextType>(null);
@@ -48,12 +48,11 @@ const SdkProvider = ({ children }) => {
 };
 
 class MiseSdk {
-
   private actions: any;
   private SERVER_URI: string;
 
   constructor() {
-    this.SERVER_URI = "https://mise-service-production.up.railway.app"; 
+    this.SERVER_URI = "https://mise-service-production.up.railway.app";
     // use the above server URI in production builds
     // this.SERVER_URI = "http://127.0.0.1:8000";
 
@@ -71,7 +70,6 @@ class MiseSdk {
     // returns the current value stored in the state
     this.registerAction("get_key", this.getMiscKey);
 
-
     // data related action
     this.registerAction("set_user", (state, action) => {
       state["user"]["name"] = action.name;
@@ -80,7 +78,7 @@ class MiseSdk {
       state["user"]["location"] = action.location;
       state["user"]["dob"] = action.dob;
     });
-    
+
     this.registerAction("set_access_token", (state, action) => {
       state["user"]["access_token"] = action.access_token;
     });
@@ -127,7 +125,7 @@ class MiseSdk {
   async createUser(name, email, password) {
     const requestBody = {
       name,
-      email, 
+      email,
       contact_phone: 0,
       momo: 0,
       password,
@@ -143,9 +141,9 @@ class MiseSdk {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     });
-    
+
     const data = await response.json();
     // we should check if it failed eventually
     if (response.ok) return { success: true, ...data };
@@ -162,12 +160,12 @@ class MiseSdk {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: formData 
+      body: formData,
     });
     console.log(response);
     const data = await response.json();
 
-    if (response.ok) return { token: data.access_token, success: true } 
+    if (response.ok) return { token: data.access_token, success: true };
     return { success: false };
   }
 }
