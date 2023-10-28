@@ -3,8 +3,9 @@ import HomePage from "../../Views/Home";
 import ShopProfile from "../../Views/Shop";
 import KitchenSink from "../../Views/KitchenSink";
 import SignUpPage from "../../Views/SignUp";
+import LogInPage from "../../Views/LogIn";
 
-import { Cart, Shop, Home } from "iconoir-react-native";
+import { Cart, Shop, Home, LogIn } from "iconoir-react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Products from "../../Views/Products";
@@ -44,7 +45,7 @@ const Something = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Explore" component={Products} />
+      <Tab.Screen name="Home" component={HomePage} />
       <Tab.Screen name="Shop" component={ShopProfile} />
       <Tab.Screen name="Cart" component={KitchenSink} />
     </Tab.Navigator>
