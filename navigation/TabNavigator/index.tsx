@@ -2,6 +2,7 @@ import React from "react";
 import HomePage from "../../Views/Home";
 import ShopProfile from "../../Views/Shop";
 import KitchenSink from "../../Views/KitchenSink";
+import SignUpPage from "../../Views/SignUp";
 
 import { Cart, Shop, Home } from "iconoir-react-native";
 
