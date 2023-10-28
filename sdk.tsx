@@ -152,17 +152,23 @@ class MiseSdk {
     return { success: false };
   }
 
-  async signIn(name, password) {
+  async signIn(username, password) {
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
     const response = await fetch(`${this.SERVER_URI}/token`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({ username: name, password })
+      body: formData 
     });
+    console.log(response);
     const data = await response.json();
 
-    if (response.ok) return data.access_token;
+    if (response.ok) return { token: data.access_token, success: true } 
+    return { success: false };
   }
 }
 

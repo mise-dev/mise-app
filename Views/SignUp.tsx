@@ -20,7 +20,6 @@ import { useState, useContext } from "react";
 import { MiseContext } from "../sdk";
 
 export default function SignUpPage({ navigation }) {
-    const [count, setCount] = useState(0);
     const mise = useContext(MiseContext);
 
     const [name, setName] = useState<string>("");
@@ -79,6 +78,9 @@ export default function SignUpPage({ navigation }) {
                                 />
                             </Input>
                         </Box>
+                    </Center>
+                    <Center>
+                        <Text>Already have an account? <Text color="$blue600" onPress={ () => navigation.navigate("Login")}>Log In</Text></Text>
                     </Center>
                 </VStack>
             </FormControl>
