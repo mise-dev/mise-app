@@ -53,9 +53,9 @@ class MiseSdk {
   private SERVER_URI: string;
 
   constructor() {
-    // this.SERVER_URI = "https://mise-service-production.up.railway.app"; 
+    this.SERVER_URI = "https://mise-service-production.up.railway.app"; 
     // use the above server URI in production builds
-    this.SERVER_URI = "http://127.0.0.1:8000";
+    // this.SERVER_URI = "http://127.0.0.1:8000";
 
     this.actions = {};
 
