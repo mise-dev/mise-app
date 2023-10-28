@@ -14,14 +14,11 @@ import { useNavigation } from "@react-navigation/native";
 import SdkProvider from "./sdk";
 // const navigation = useNavigation();
 // import screens here
-import Home from "./Views/Home";
-import KitchenSink from "./Views/KitchenSink";
-import ShopProfile from "./Views/Shop";
-import Products from "./Views/Products";
-import SearchView from "./Views/SearchView";
+import SignUpPage from "./Views/SignUp";
+import LogInPage from "./Views/LogIn";
 
 import { StatusBar } from "react-native";
-import RootNavigator from "./navigation/RootNavigator";
+import TabNavigator from "./navigation/TabNavigator";
 
 const Stack = createNativeStackNavigator();
 // configuring the header
@@ -68,7 +65,16 @@ export default function App() {
     <GluestackUIProvider config={config.theme}>
       <SdkProvider>
         <StatusBar hidden />
-        <RootNavigator />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Signup" component={SignUpPage} />
+            <Stack.Screen name="Login" component={LogInPage} />
+            <Stack.Screen
+              name="Main"
+              component={TabNavigator}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </SdkProvider>
     </GluestackUIProvider>
   );

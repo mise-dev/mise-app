@@ -19,7 +19,7 @@ import {
 import { useState, useContext } from "react";
 import { MiseContext } from "../sdk";
 
-export default function SignUpPage({ navigation }) {
+export default function LogInPage({ navigation }) {
     const [count, setCount] = useState(0);
     const mise = useContext(MiseContext);
 
@@ -88,8 +88,8 @@ export default function SignUpPage({ navigation }) {
                     // will provide the info
                     const result = await mise.sdk.createUser(name, email, password);
                     if (result.success) {
-                        navigation.navigate("Login");
-                    }
+                        console.log("this was a success");
+                    } else console.log("it failed 🫨");
                 }}>
                     <ButtonText>
                         Sign Up

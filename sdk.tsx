@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 type ContextType = {
   readonly data: any;
   dispatch: React.Dispatch<any>;
+  sdk: MiseSdk
 };
 
 const MiseContext = createContext<ContextType>(null);
@@ -40,7 +41,7 @@ const SdkProvider = ({ children }) => {
   });
 
   return (
-    <MiseContext.Provider value={{ data: state, dispatch }}>
+    <MiseContext.Provider value={{ data: state, dispatch, sdk }}>
       {children}
     </MiseContext.Provider>
   );
@@ -52,7 +53,9 @@ class MiseSdk {
   private SERVER_URI: string;
 
   constructor() {
-    this.SERVER_URI = "https://mise-service-production.up.railway.app";
+    // this.SERVER_URI = "https://mise-service-production.up.railway.app"; 
+    // use the above server URI in production builds
+    this.SERVER_URI = "http://127.0.0.1:8000";
 
     this.actions = {};
 
@@ -129,10 +132,13 @@ class MiseSdk {
       momo: 0,
       password,
       location: "Cameroon",
-      id: Math.floor(Math.random() * 1000) 
+      id: Math.floor(Math.random() * 1000),
+      profile_image: "none",
+      date_of_birth: new Date().toLocaleDateString(),
+      active: true,
     };
 
-    const response = await fetch(`${this.SERVER_URI}/users`, {
+    const response = await fetch(`${this.SERVER_URI}/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -140,9 +146,10 @@ class MiseSdk {
       body: JSON.stringify(requestBody)
     });
     
-      const data = await response.json();
+    const data = await response.json();
     // we should check if it failed eventually
-    if (response.ok) return data;
+    if (response.ok) return { success: true, ...data };
+    return { success: false };
   }
 
   async signIn(name, password) {
