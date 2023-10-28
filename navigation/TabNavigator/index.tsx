@@ -1,10 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { TabBar, TabView } from "react-native-tab-view";
 import HomePage from "../../Views/Home";
 import ShopProfile from "../../Views/Shop";
 import KitchenSink from "../../Views/KitchenSink";
-import { Box } from "@gluestack-ui/themed";
 
 import { Cart, Shop, Home } from "iconoir-react-native";
 
