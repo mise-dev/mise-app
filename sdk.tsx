@@ -1,5 +1,4 @@
 import { createContext, useReducer } from "react";
-import { nanoid } from "nanoid";
 
 type ContextType = {
   readonly data: any;
@@ -122,15 +121,15 @@ class MiseSdk {
   }
 
   // app <> server communication
-  async createUser(name, email, phone, password) {
+  async createUser(name, email, password) {
     const requestBody = {
       name,
       email, 
-      contact_phone: phone,
-      momo: phone,
+      contact_phone: 0,
+      momo: 0,
       password,
       location: "Cameroon",
-      id: nanoid(5)
+      id: Math.floor(Math.random() * 1000) 
     };
 
     const response = await fetch(`${this.SERVER_URI}/users`, {
