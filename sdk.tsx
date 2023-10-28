@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { nanoid } from "nanoid";
 
 type ContextType = {
   readonly data: any;
@@ -29,7 +30,6 @@ const SdkProvider = ({ children }) => {
 
   const stateReducer = (s, a) => sdk.stateReducer(s, a);
   const [state, dispatch] = useReducer(stateReducer, {
-    routeName: "Home",
     cart: {},
     explore: {},
     user: {},
@@ -48,8 +48,13 @@ const SdkProvider = ({ children }) => {
 };
 
 class MiseSdk {
+
   private actions: any;
+  private SERVER_URI: string;
+
   constructor() {
+    this.SERVER_URI = "https://mise-service-production.up.railway.app";
+
     this.actions = {};
 
     // handles adding a new value to a parent
@@ -63,6 +68,20 @@ class MiseSdk {
 
     // returns the current value stored in the state
     this.registerAction("get_key", this.getMiscKey);
+
+
+    // data related action
+    this.registerAction("set_user", (state, action) => {
+      state["user"]["name"] = action.name;
+      state["user"]["email"] = action.email;
+      state["user"]["phone"] = action.phone;
+      state["user"]["location"] = action.location;
+      state["user"]["dob"] = action.dob;
+    });
+    
+    this.registerAction("set_access_token", (state, action) => {
+      state["user"]["access_token"] = action.access_token;
+    });
   }
 
   // making a new copy of the state object
@@ -100,6 +119,44 @@ class MiseSdk {
   // get's a value stored at the top leve l of state
   getMiscKey(state: any, action: any): any {
     return state[action.key];
+  }
+
+  // app <> server communication
+  async createUser(name, email, phone, password) {
+    const requestBody = {
+      name,
+      email, 
+      contact_phone: phone,
+      momo: phone,
+      password,
+      location: "Cameroon",
+      id: nanoid(5)
+    };
+
+    const response = await fetch(`${this.SERVER_URI}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody)
+    });
+    
+      const data = await response.json();
+    // we should check if it failed eventually
+    if (response.ok) return data;
+  }
+
+  async signIn(name, password) {
+    const response = await fetch(`${this.SERVER_URI}/token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: name, password })
+    });
+    const data = await response.json();
+
+    if (response.ok) return data.access_token;
   }
 }
 
