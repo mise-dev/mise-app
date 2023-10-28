@@ -46,7 +46,7 @@ const Product: React.FC<ProductProps> = ({ orders, rating, price }) => {
     for (let index = 1; index <= 5; index++) {
       if (index <= rating) {
         listStars.push(
-          <Star fill={"gold"} color={"black"} width={15} height={15} />
+          <Star fill={"gold"} color={"black"} width={15} height={15} />,
         );
       } else {
         listStars.push(<Star color={"black"} width={15} height={15} />);

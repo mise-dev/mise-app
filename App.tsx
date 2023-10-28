@@ -69,10 +69,7 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name="Signup" component={SignUpPage} />
             <Stack.Screen name="Login" component={LogInPage} />
-            <Stack.Screen
-              name="Main"
-              component={TabNavigator}
-            />
+            <Stack.Screen name="Main" component={TabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>
       </SdkProvider>
